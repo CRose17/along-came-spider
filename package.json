@@ -1,0 +1,26 @@
+{
+  "name": "alongcameaspider",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/index.html -p 8000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CRose17/along-came-spider.git"
+  },
+  "author": "Cameron Rosenberger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CRose17/along-came-spider/issues"
+  },
+  "homepage": "https://github.com/CRose17/along-came-spider#readme",
+  "dependencies": {
+    "kaboom": "^0.5.1"
+  },
+  "alias": {
+    "kaboom": "./node_modules/kaboom/dist/kaboom.mjs"
+  }
+}
