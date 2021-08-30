@@ -126,9 +126,11 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = exports.k = void 0;
 var k = kaboom({
   fullscreen: true,
-  width: 480,
-  height: 360,
+
+  /* width: 480,
+  height: 360, */
   scale: 1,
+  debug: true,
   clearColor: [0.28627450980392155, 0.7647058823529411, 0.7725490196078432, 1]
 });
 exports.k = k;
@@ -184,13 +186,19 @@ _kaboom.default.scene("lose", _lose.default);
 
 _kaboom.default.scene("win", _win.default);
 
-_kaboom.default.loadRoot("../sprites/");
+_kaboom.default.loadRoot("https://i.imgur.com/");
 
-_kaboom.default.loadSprite("spider", "spider.png");
+_kaboom.default.loadSprite("spider", "aTxTD53.png");
 
-_kaboom.default.loadSprite("fly", "fly.png");
+_kaboom.default.loadSprite("fly", "7FtRXwP.png");
 
-_kaboom.default.loadSprite("bolt", "bolt.png");
+_kaboom.default.loadSprite("bolt", "0PndioM.png");
+
+_kaboom.default.loadSprite("web", "6iE2HD3.png?1");
+
+_kaboom.default.loadSprite("wall", "7JzKe7Xs.png");
+
+_kaboom.default.loadSprite("ground", "8hfkcDUs.png");
 
 var block_size = 20;
 var MOVE_SPEED = 200;
@@ -203,13 +211,58 @@ var TIME_LEFT = 20;
 _kaboom.default.layers(["bg", "obj", "ui"], "obj");
 
 function Game() {
-  _kaboom.default.addLevel(["     =                s                 =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"], {
+  _kaboom.default.addLevel(["     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =         b                        =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                            f     =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"], {
     width: block_size,
     height: block_size,
     pos: (0, 0),
-    "=": [_kaboom.default.rect(block_size, block_size), _kaboom.default.color(255, 0, 0), "wall"],
-    x: [_kaboom.default.rect(block_size, block_size), _kaboom.default.color(0, 0, 0), "ground"],
-    s: [_kaboom.default.sprite("spider"), solid()]
+    "=": [_kaboom.default.sprite("wall")],
+    x: [_kaboom.default.sprite("ground")],
+    b: [_kaboom.default.sprite("bolt")],
+    f: [_kaboom.default.sprite("fly")]
+  });
+
+  var score = _kaboom.default.add([_kaboom.default.text("0"), _kaboom.default.pos(50, 300), _kaboom.default.layer("ui"), _kaboom.default.scale(2.5), {
+    value: 0
+  }]);
+
+  var timer = _kaboom.default.add([_kaboom.default.text("0"), _kaboom.default.pos(50, 350), _kaboom.default.scale(2), _kaboom.default.layer("ui"), {
+    time: TIME_LEFT
+  }]);
+  /*   timer.action(() => {
+    timer.time -= k.dt();
+    timer.text = timer.time.toFixed(2);
+    if (timer.time <= 0) {
+      go("lose", { score: score.value });
+    } else if (score.value === 3) {
+      go("win", { score: score.value });
+    }
+  }); */
+
+
+  var spider = _kaboom.default.add([_kaboom.default.sprite("spider"), _kaboom.default.pos(300, 0)]);
+
+  _kaboom.default.keyDown("right", function () {
+    spider.move(MOVE_SPEED, 0);
+  });
+
+  _kaboom.default.keyDown("left", function () {
+    spider.move(-MOVE_SPEED, 0);
+  });
+
+  function spawnWeb(p) {
+    _kaboom.default.add([_kaboom.default.sprite("web"), _kaboom.default.pos(p), _kaboom.default.origin("center"), "webHit"]);
+  }
+
+  _kaboom.default.keyPress("space", function () {
+    spawnWeb(spider.pos.add(0, 40));
+  });
+
+  _kaboom.default.action("webHit", function (b) {
+    b.move(0, WEB_SPEED);
+
+    if (b.pos === "ground") {
+      _kaboom.default.destroy(b);
+    }
   });
 }
 },{"../src/kaboom":"kaboom.js","./win":"../scenes/win.js","./lose":"../scenes/lose.js"}],"main.js":[function(require,module,exports) {
@@ -310,7 +363,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57715" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57474" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
