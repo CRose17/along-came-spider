@@ -5,6 +5,12 @@ import Lose from "./lose";
 k.scene("lose", Lose);
 k.scene("win", Win);
 
+k.loadRoot("../sprites/");
+k.loadSprite("spider", "spider.png");
+k.loadSprite("fly", "fly.png");
+k.loadSprite("bolt", "bolt.png");
+
+const block_size = 20;
 const MOVE_SPEED = 200;
 const WEB_SPEED = 300;
 const FLY1_SPEED = 50;
@@ -15,12 +21,45 @@ const TIME_LEFT = 20;
 k.layers(["bg", "obj", "ui"], "obj");
 
 export default function Game() {
-  k.add([
-    k.text("Game goes here", 32),
-    k.pos(k.width() / 2, k.height() / 2),
-    k.color(1, 1, 1, 1),
-    k.origin("top")
-  ]);
+  k.addLevel(
+    [
+      "     =                s                 =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     =                                  =",
+      "     xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    ],
+    {
+      width: block_size,
+      height: block_size,
+      pos: (0, 0),
+      "=": [k.rect(block_size, block_size), k.color(255, 0, 0), "wall"],
+      x: [k.rect(block_size, block_size), k.color(0, 0, 0), "ground"],
+      s: [k.sprite("spider"), solid()]
+    }
+  );
 }
-
-//const spider = k.add([k.sprite("spider"), k.scale(2), k.pos(20, 0)]);

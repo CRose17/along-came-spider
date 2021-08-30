@@ -184,6 +184,15 @@ _kaboom.default.scene("lose", _lose.default);
 
 _kaboom.default.scene("win", _win.default);
 
+_kaboom.default.loadRoot("../sprites/");
+
+_kaboom.default.loadSprite("spider", "spider.png");
+
+_kaboom.default.loadSprite("fly", "fly.png");
+
+_kaboom.default.loadSprite("bolt", "bolt.png");
+
+var block_size = 20;
 var MOVE_SPEED = 200;
 var WEB_SPEED = 300;
 var FLY1_SPEED = 50;
@@ -194,8 +203,15 @@ var TIME_LEFT = 20;
 _kaboom.default.layers(["bg", "obj", "ui"], "obj");
 
 function Game() {
-  _kaboom.default.add([_kaboom.default.text("Game goes here", 32), _kaboom.default.pos(_kaboom.default.width() / 2, _kaboom.default.height() / 2), _kaboom.default.color(1, 1, 1, 1), _kaboom.default.origin("top")]);
-} //const spider = k.add([k.sprite("spider"), k.scale(2), k.pos(20, 0)]);
+  _kaboom.default.addLevel(["     =                s                 =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"], {
+    width: block_size,
+    height: block_size,
+    pos: (0, 0),
+    "=": [_kaboom.default.rect(block_size, block_size), _kaboom.default.color(255, 0, 0), "wall"],
+    x: [_kaboom.default.rect(block_size, block_size), _kaboom.default.color(0, 0, 0), "ground"],
+    s: [_kaboom.default.sprite("spider"), solid()]
+  });
+}
 },{"../src/kaboom":"kaboom.js","./win":"../scenes/win.js","./lose":"../scenes/lose.js"}],"main.js":[function(require,module,exports) {
 "use strict";
 
@@ -294,7 +310,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55124" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57715" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
