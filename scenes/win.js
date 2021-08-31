@@ -12,11 +12,15 @@ export default function Win() {
   ]);
   k.add([
     k.rect(185, 40),
-    k.pos(375, 490),
+    k.pos(k.width() / 2 - 90, k.height() / 2 + 80),
     "button",
     { clickAction: () => k.go("game") }
   ]);
-  k.add([k.text("Play again?", 16), k.pos(380, 500), k.color(0, 0, 0)]);
+  k.add([
+    k.text("Play again?", 16),
+    k.pos(k.width() / 2 - 85, k.height() / 2 + 90),
+    k.color(0, 0, 0)
+  ]);
 
   k.action("button", (b) => {
     if (b.isHovered()) b.use(k.color(0.7, 0.7, 0.7));

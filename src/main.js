@@ -12,43 +12,47 @@ k.scene("main", () => {
   ]);
   k.add([
     k.rect(155, 40),
-    k.pos(195, 490),
+    k.pos(k.width() / 2 - 200, k.height() / 2 + 100),
     "button",
     { clickAction: () => k.go("game") }
   ]);
-  k.add([k.text("Play game", 16), k.pos(200, 500), k.color(0, 0, 0)]);
+  k.add([
+    k.text("Play game", 16),
+    k.pos(k.width() / 2 - 195, k.height() / 2 + 110),
+    k.color(0, 0, 0)
+  ]);
 
   k.add([
     k.rect(250, 30),
-    k.pos(510, 490),
+    k.pos(k.width() / 2 + 50, k.height() / 2 + 100),
     "button",
     { clickAction: () => k.go("game") }
   ]);
   k.add([
     k.text("<- arrow = move left", 12),
-    k.pos(520, 500),
+    k.pos(k.width() / 2 + 55, k.height() / 2 + 110),
     k.color(0, 0, 0)
   ]);
   k.add([
     k.rect(260, 30),
-    k.pos(510, 530),
+    k.pos(k.width() / 2 + 50, k.height() / 2 + 140),
     "button",
     { clickAction: () => k.go("game") }
   ]);
   k.add([
     k.text("-> arrow = move right", 12),
-    k.pos(515, 540),
+    k.pos(k.width() / 2 + 55, k.height() / 2 + 150),
     k.color(0, 0, 0)
   ]);
   k.add([
     k.rect(250, 30),
-    k.pos(510, 570),
+    k.pos(k.width() / 2 + 50, k.height() / 2 + 180),
     "button",
     { clickAction: () => k.go("game") }
   ]);
   k.add([
     k.text("spacebar = shoot web", 12),
-    k.pos(515, 580),
+    k.pos(k.width() / 2 + 55, k.height() / 2 + 190),
     k.color(0, 0, 0)
   ]);
 

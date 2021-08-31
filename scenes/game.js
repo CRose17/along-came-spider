@@ -29,35 +29,32 @@ k.layers(["bg", "obj", "ui"], "obj");
 export default function Game() {
   k.addLevel(
     [
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     w                                  h",
-      "     xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     w                            h",
+      "     xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     ],
     {
       width: block_size,
@@ -100,7 +97,10 @@ export default function Game() {
     }
   });
 
-  const spider = k.add([k.sprite("spider"), k.pos(300, 0)]);
+  const spider = k.add([
+    k.sprite("spider"),
+    k.pos(k.width() / 2, k.height() / 2 - 270)
+  ]);
 
   k.keyDown("right", () => {
     spider.move(MOVE_SPEED, 0);
@@ -259,10 +259,14 @@ export default function Game() {
     score.text = score.value;
   });
 
-  k.add([k.rect(310, 30), k.pos(310, 640)]);
+  k.add([
+    k.rect(310, 30),
+    k.pos(k.width() / 2 - 100, k.height() / 2 + 240),
+    k.color(0, 0, 0)
+  ]);
   k.add([
     k.text("Capture 10 flies and WIN!", 12),
-    k.pos(315, 650),
-    k.color(0, 0, 0)
+    k.pos(k.width() / 2 - 95, k.height() / 2 + 250),
+    k.color(1, 1, 1)
   ]);
 }

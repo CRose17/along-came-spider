@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"kaboom.js":[function(require,module,exports) {
+})({"src/kaboom.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -125,10 +125,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = exports.k = void 0;
 var k = kaboom({
-  fullscreen: true,
-
-  /* width: 480,
-  height: 360, */
+  fullscreen: false,
+  width: 720,
+  height: 540,
   scale: 1,
   debug: true,
   clearColor: [0.28627450980392155, 0.7647058823529411, 0.7725490196078432, 1]
@@ -136,7 +135,7 @@ var k = kaboom({
 exports.k = k;
 var _default = k;
 exports.default = _default;
-},{}],"../scenes/win.js":[function(require,module,exports) {
+},{}],"scenes/win.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -155,20 +154,20 @@ _kaboom.default.scene("game", _game.default);
 function Win() {
   _kaboom.default.add([_kaboom.default.text("You Win!", 32), _kaboom.default.pos(_kaboom.default.width() / 2, _kaboom.default.height() / 2), _kaboom.default.color(1, 1, 1, 1), _kaboom.default.origin("top")]);
 
-  _kaboom.default.add([_kaboom.default.rect(185, 40), _kaboom.default.pos(375, 490), "button", {
+  _kaboom.default.add([_kaboom.default.rect(185, 40), _kaboom.default.pos(_kaboom.default.width() / 2 - 90, _kaboom.default.height() / 2 + 80), "button", {
     clickAction: function clickAction() {
       return _kaboom.default.go("game");
     }
   }]);
 
-  _kaboom.default.add([_kaboom.default.text("Play again?", 16), _kaboom.default.pos(380, 500), _kaboom.default.color(0, 0, 0)]);
+  _kaboom.default.add([_kaboom.default.text("Play again?", 16), _kaboom.default.pos(_kaboom.default.width() / 2 - 85, _kaboom.default.height() / 2 + 90), _kaboom.default.color(0, 0, 0)]);
 
   _kaboom.default.action("button", function (b) {
     if (b.isHovered()) b.use(_kaboom.default.color(0.7, 0.7, 0.7));else b.use(_kaboom.default.color(1, 1, 1));
     if (b.isClicked()) b.clickAction();
   });
 }
-},{"../src/kaboom":"kaboom.js","./game":"../scenes/game.js"}],"../scenes/lose.js":[function(require,module,exports) {
+},{"../src/kaboom":"src/kaboom.js","./game":"scenes/game.js"}],"scenes/lose.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -187,20 +186,20 @@ _kaboom.default.scene("game", _game.default);
 function Lose() {
   _kaboom.default.add([_kaboom.default.text("So close", 32), _kaboom.default.pos(_kaboom.default.width() / 2, _kaboom.default.height() / 2), _kaboom.default.color(1, 1, 1, 1), _kaboom.default.origin("top")]);
 
-  _kaboom.default.add([_kaboom.default.rect(165, 40), _kaboom.default.pos(400, 490), "button", {
+  _kaboom.default.add([_kaboom.default.rect(165, 40), _kaboom.default.pos(_kaboom.default.width() / 2 - 85, _kaboom.default.height() / 2 + 80), "button", {
     clickAction: function clickAction() {
       return _kaboom.default.go("game");
     }
   }]);
 
-  _kaboom.default.add([_kaboom.default.text("Try again!", 16), _kaboom.default.pos(405, 500), _kaboom.default.color(0, 0, 0)]);
+  _kaboom.default.add([_kaboom.default.text("Try again!", 16), _kaboom.default.pos(_kaboom.default.width() / 2 - 80, _kaboom.default.height() / 2 + 90), _kaboom.default.color(0, 0, 0)]);
 
   _kaboom.default.action("button", function (b) {
     if (b.isHovered()) b.use(_kaboom.default.color(0.7, 0.7, 0.7));else b.use(_kaboom.default.color(1, 1, 1));
     if (b.isClicked()) b.clickAction();
   });
 }
-},{"../src/kaboom":"kaboom.js","./game":"../scenes/game.js"}],"../scenes/game.js":[function(require,module,exports) {
+},{"../src/kaboom":"src/kaboom.js","./game":"scenes/game.js"}],"scenes/game.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -249,7 +248,7 @@ var TIME_LEFT = 30;
 _kaboom.default.layers(["bg", "obj", "ui"], "obj");
 
 function Game() {
-  _kaboom.default.addLevel(["     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"], {
+  _kaboom.default.addLevel(["     w                            h", "     w                            h", "     w                            h", "     w                            h", "     w                            h", "     w                            h", "     w                            h", "     w                            h", "     w                            h", "     w                            h", "     w                            h", "     w                            h", "     w                            h", "     w                            h", "     w                            h", "     w                            h", "     w                            h", "     w                            h", "     w                            h", "     w                            h", "     w                            h", "     w                            h", "     w                            h", "     w                            h", "     w                            h", "     xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"], {
     width: block_size,
     height: block_size,
     pos: (0, 0),
@@ -282,7 +281,7 @@ function Game() {
     }
   });
 
-  var spider = _kaboom.default.add([_kaboom.default.sprite("spider"), _kaboom.default.pos(300, 0)]);
+  var spider = _kaboom.default.add([_kaboom.default.sprite("spider"), _kaboom.default.pos(_kaboom.default.width() / 2, _kaboom.default.height() / 2 - 270)]);
 
   _kaboom.default.keyDown("right", function () {
     spider.move(MOVE_SPEED, 0);
@@ -467,11 +466,11 @@ function Game() {
     score.text = score.value;
   });
 
-  _kaboom.default.add([_kaboom.default.rect(310, 30), _kaboom.default.pos(310, 640)]);
+  _kaboom.default.add([_kaboom.default.rect(310, 30), _kaboom.default.pos(_kaboom.default.width() / 2 - 100, _kaboom.default.height() / 2 + 240), _kaboom.default.color(0, 0, 0)]);
 
-  _kaboom.default.add([_kaboom.default.text("Capture 10 flies and WIN!", 12), _kaboom.default.pos(315, 650), _kaboom.default.color(0, 0, 0)]);
+  _kaboom.default.add([_kaboom.default.text("Capture 10 flies and WIN!", 12), _kaboom.default.pos(_kaboom.default.width() / 2 - 95, _kaboom.default.height() / 2 + 250), _kaboom.default.color(1, 1, 1)]);
 }
-},{"../src/kaboom":"kaboom.js","./win":"../scenes/win.js","./lose":"../scenes/lose.js"}],"main.js":[function(require,module,exports) {
+},{"../src/kaboom":"src/kaboom.js","./win":"scenes/win.js","./lose":"scenes/lose.js"}],"src/main.js":[function(require,module,exports) {
 "use strict";
 
 var _kaboom = _interopRequireDefault(require("./kaboom"));
@@ -485,37 +484,37 @@ _kaboom.default.scene("game", _game.default);
 _kaboom.default.scene("main", function () {
   _kaboom.default.add([_kaboom.default.text("Along Came A Spider", 32), _kaboom.default.pos(_kaboom.default.width() / 2, _kaboom.default.height() / 2), _kaboom.default.color(1, 1, 1, 1), _kaboom.default.origin("top")]);
 
-  _kaboom.default.add([_kaboom.default.rect(155, 40), _kaboom.default.pos(195, 490), "button", {
+  _kaboom.default.add([_kaboom.default.rect(155, 40), _kaboom.default.pos(_kaboom.default.width() / 2 - 200, _kaboom.default.height() / 2 + 100), "button", {
     clickAction: function clickAction() {
       return _kaboom.default.go("game");
     }
   }]);
 
-  _kaboom.default.add([_kaboom.default.text("Play game", 16), _kaboom.default.pos(200, 500), _kaboom.default.color(0, 0, 0)]);
+  _kaboom.default.add([_kaboom.default.text("Play game", 16), _kaboom.default.pos(_kaboom.default.width() / 2 - 195, _kaboom.default.height() / 2 + 110), _kaboom.default.color(0, 0, 0)]);
 
-  _kaboom.default.add([_kaboom.default.rect(250, 30), _kaboom.default.pos(510, 490), "button", {
+  _kaboom.default.add([_kaboom.default.rect(250, 30), _kaboom.default.pos(_kaboom.default.width() / 2 + 50, _kaboom.default.height() / 2 + 100), "button", {
     clickAction: function clickAction() {
       return _kaboom.default.go("game");
     }
   }]);
 
-  _kaboom.default.add([_kaboom.default.text("<- arrow = move left", 12), _kaboom.default.pos(520, 500), _kaboom.default.color(0, 0, 0)]);
+  _kaboom.default.add([_kaboom.default.text("<- arrow = move left", 12), _kaboom.default.pos(_kaboom.default.width() / 2 + 55, _kaboom.default.height() / 2 + 110), _kaboom.default.color(0, 0, 0)]);
 
-  _kaboom.default.add([_kaboom.default.rect(260, 30), _kaboom.default.pos(510, 530), "button", {
+  _kaboom.default.add([_kaboom.default.rect(260, 30), _kaboom.default.pos(_kaboom.default.width() / 2 + 50, _kaboom.default.height() / 2 + 140), "button", {
     clickAction: function clickAction() {
       return _kaboom.default.go("game");
     }
   }]);
 
-  _kaboom.default.add([_kaboom.default.text("-> arrow = move right", 12), _kaboom.default.pos(515, 540), _kaboom.default.color(0, 0, 0)]);
+  _kaboom.default.add([_kaboom.default.text("-> arrow = move right", 12), _kaboom.default.pos(_kaboom.default.width() / 2 + 55, _kaboom.default.height() / 2 + 150), _kaboom.default.color(0, 0, 0)]);
 
-  _kaboom.default.add([_kaboom.default.rect(250, 30), _kaboom.default.pos(510, 570), "button", {
+  _kaboom.default.add([_kaboom.default.rect(250, 30), _kaboom.default.pos(_kaboom.default.width() / 2 + 50, _kaboom.default.height() / 2 + 180), "button", {
     clickAction: function clickAction() {
       return _kaboom.default.go("game");
     }
   }]);
 
-  _kaboom.default.add([_kaboom.default.text("spacebar = shoot web", 12), _kaboom.default.pos(515, 580), _kaboom.default.color(0, 0, 0)]);
+  _kaboom.default.add([_kaboom.default.text("spacebar = shoot web", 12), _kaboom.default.pos(_kaboom.default.width() / 2 + 55, _kaboom.default.height() / 2 + 190), _kaboom.default.color(0, 0, 0)]);
 
   _kaboom.default.action("button", function (b) {
     if (b.isHovered()) b.use(_kaboom.default.color(0.7, 0.7, 0.7));else b.use(_kaboom.default.color(1, 1, 1));
@@ -524,7 +523,7 @@ _kaboom.default.scene("main", function () {
 });
 
 _kaboom.default.start("main");
-},{"./kaboom":"kaboom.js","../scenes/game":"../scenes/game.js"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./kaboom":"src/kaboom.js","../scenes/game":"scenes/game.js"}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -552,7 +551,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60064" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52608" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -728,5 +727,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","main.js"], null)
-//# sourceMappingURL=/main.1f19ae8e.js.map
+},{}]},{},["../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/main.js"], null)
+//# sourceMappingURL=/main.1e43358e.js.map
