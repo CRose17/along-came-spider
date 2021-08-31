@@ -146,12 +146,29 @@ exports.default = Win;
 
 var _kaboom = _interopRequireDefault(require("../src/kaboom"));
 
+var _game = _interopRequireDefault(require("./game"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_kaboom.default.scene("game", _game.default);
 
 function Win() {
   _kaboom.default.add([_kaboom.default.text("You Win!", 32), _kaboom.default.pos(_kaboom.default.width() / 2, _kaboom.default.height() / 2), _kaboom.default.color(1, 1, 1, 1), _kaboom.default.origin("top")]);
+
+  _kaboom.default.add([_kaboom.default.rect(185, 40), _kaboom.default.pos(375, 490), "button", {
+    clickAction: function clickAction() {
+      return _kaboom.default.go("game");
+    }
+  }]);
+
+  _kaboom.default.add([_kaboom.default.text("Play again?", 16), _kaboom.default.pos(380, 500), _kaboom.default.color(0, 0, 0)]);
+
+  _kaboom.default.action("button", function (b) {
+    if (b.isHovered()) b.use(_kaboom.default.color(0.7, 0.7, 0.7));else b.use(_kaboom.default.color(1, 1, 1));
+    if (b.isClicked()) b.clickAction();
+  });
 }
-},{"../src/kaboom":"kaboom.js"}],"../scenes/lose.js":[function(require,module,exports) {
+},{"../src/kaboom":"kaboom.js","./game":"../scenes/game.js"}],"../scenes/lose.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -161,12 +178,29 @@ exports.default = Lose;
 
 var _kaboom = _interopRequireDefault(require("../src/kaboom"));
 
+var _game = _interopRequireDefault(require("./game"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+_kaboom.default.scene("game", _game.default);
+
 function Lose() {
-  _kaboom.default.add([_kaboom.default.text("Oooo try again!", 32), _kaboom.default.pos(_kaboom.default.width() / 2, _kaboom.default.height() / 2), _kaboom.default.color(1, 1, 1, 1), _kaboom.default.origin("top")]);
+  _kaboom.default.add([_kaboom.default.text("So close", 32), _kaboom.default.pos(_kaboom.default.width() / 2, _kaboom.default.height() / 2), _kaboom.default.color(1, 1, 1, 1), _kaboom.default.origin("top")]);
+
+  _kaboom.default.add([_kaboom.default.rect(165, 40), _kaboom.default.pos(400, 490), "button", {
+    clickAction: function clickAction() {
+      return _kaboom.default.go("game");
+    }
+  }]);
+
+  _kaboom.default.add([_kaboom.default.text("Try again!", 16), _kaboom.default.pos(405, 500), _kaboom.default.color(0, 0, 0)]);
+
+  _kaboom.default.action("button", function (b) {
+    if (b.isHovered()) b.use(_kaboom.default.color(0.7, 0.7, 0.7));else b.use(_kaboom.default.color(1, 1, 1));
+    if (b.isClicked()) b.clickAction();
+  });
 }
-},{"../src/kaboom":"kaboom.js"}],"../scenes/game.js":[function(require,module,exports) {
+},{"../src/kaboom":"kaboom.js","./game":"../scenes/game.js"}],"../scenes/game.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -190,7 +224,11 @@ _kaboom.default.loadRoot("https://i.imgur.com/");
 
 _kaboom.default.loadSprite("spider", "aTxTD53.png");
 
-_kaboom.default.loadSprite("fly", "7FtRXwP.png");
+_kaboom.default.loadSprite("fly1", "7FtRXwP.png");
+
+_kaboom.default.loadSprite("fly2", "7FtRXwP.png");
+
+_kaboom.default.loadSprite("fly3", "7FtRXwP.png");
 
 _kaboom.default.loadSprite("bolt", "0PndioM.png");
 
@@ -206,38 +244,43 @@ var WEB_SPEED = 300;
 var FLY1_SPEED = 50;
 var FLY2_SPEED = 170;
 var FLY3_SPEED = 100;
-var TIME_LEFT = 20;
+var TIME_LEFT = 30;
 
 _kaboom.default.layers(["bg", "obj", "ui"], "obj");
 
 function Game() {
-  _kaboom.default.addLevel(["     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =         b                        =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                            f     =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     =                                  =", "     xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"], {
+  _kaboom.default.addLevel(["     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     w                                  h", "     xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"], {
     width: block_size,
     height: block_size,
     pos: (0, 0),
-    "=": [_kaboom.default.sprite("wall")],
-    x: [_kaboom.default.sprite("ground")],
-    b: [_kaboom.default.sprite("bolt")],
-    f: [_kaboom.default.sprite("fly")]
+    w: [_kaboom.default.sprite("wall"), "left-wall", _kaboom.default.solid(), _kaboom.default.scale(0.5)],
+    h: [_kaboom.default.sprite("wall"), "right-wall", _kaboom.default.solid(), _kaboom.default.scale(0.5)],
+    x: [_kaboom.default.sprite("ground"), "ground", _kaboom.default.solid(), _kaboom.default.scale(0.5)],
+    b: [_kaboom.default.sprite("bolt"), _kaboom.default.solid()]
   });
 
-  var score = _kaboom.default.add([_kaboom.default.text("0"), _kaboom.default.pos(50, 300), _kaboom.default.layer("ui"), _kaboom.default.scale(2.5), {
+  var score = _kaboom.default.add([_kaboom.default.text("0"), _kaboom.default.pos(40, 40), _kaboom.default.layer("ui"), _kaboom.default.scale(2.5), {
     value: 0
   }]);
 
-  var timer = _kaboom.default.add([_kaboom.default.text("0"), _kaboom.default.pos(50, 350), _kaboom.default.scale(2), _kaboom.default.layer("ui"), {
+  var timer = _kaboom.default.add([_kaboom.default.text("0"), _kaboom.default.pos(20, 150), _kaboom.default.scale(2), _kaboom.default.layer("ui"), {
     time: TIME_LEFT
   }]);
-  /*   timer.action(() => {
-    timer.time -= k.dt();
-    timer.text = timer.time.toFixed(2);
-    if (timer.time <= 0) {
-      go("lose", { score: score.value });
-    } else if (score.value === 3) {
-      go("win", { score: score.value });
-    }
-  }); */
 
+  timer.action(function () {
+    timer.time -= _kaboom.default.dt();
+    timer.text = timer.time.toFixed(2);
+
+    if (timer.time <= 0) {
+      _kaboom.default.go("lose", {
+        score: score.value
+      });
+    } else if (score.value === 10) {
+      _kaboom.default.go("win", {
+        score: score.value
+      });
+    }
+  });
 
   var spider = _kaboom.default.add([_kaboom.default.sprite("spider"), _kaboom.default.pos(300, 0)]);
 
@@ -249,21 +292,184 @@ function Game() {
     spider.move(-MOVE_SPEED, 0);
   });
 
+  function respawn_all() {
+    _kaboom.default.run_loop = false;
+
+    _kaboom.default.wait(0.5, function () {
+      respawn_fly1();
+      respawn_fly2();
+      respawn_fly3();
+      _kaboom.default.run_loop = true;
+    });
+  }
+
+  respawn_all();
+  var fly1 = null;
+  var CURRENT1_SPEED = FLY1_SPEED;
+
+  function respawn_fly1() {
+    var new_pos = _kaboom.default.rand(_kaboom.default.vec2(200, 100), _kaboom.default.vec2(700, 400));
+
+    new_pos.x = Math.floor(new_pos.x);
+    new_pos.y = Math.floor(new_pos.y);
+
+    if (fly1) {
+      _kaboom.default.destroy(fly1);
+    }
+
+    fly1 = _kaboom.default.add([_kaboom.default.sprite("fly1"), _kaboom.default.pos(new_pos), "fly1"]);
+  }
+
+  _kaboom.default.action("fly1", function (s) {
+    s.move(CURRENT1_SPEED, 0);
+  });
+
+  _kaboom.default.collides("fly1", "right-wall", function () {
+    CURRENT1_SPEED = -FLY1_SPEED;
+
+    _kaboom.default.every("fly1", function (s) {
+      s.move(0, 0);
+    });
+  });
+
+  _kaboom.default.collides("fly1", "left-wall", function () {
+    CURRENT1_SPEED = FLY1_SPEED;
+
+    _kaboom.default.every("fly1", function (s) {
+      s.move(0, 0);
+    });
+  });
+
+  var fly2 = null;
+  var CURRENT2_SPEED = FLY2_SPEED;
+
+  function respawn_fly2() {
+    var new_pos = _kaboom.default.rand(_kaboom.default.vec2(200, 100), _kaboom.default.vec2(700, 400));
+
+    new_pos.x = Math.floor(new_pos.x);
+    new_pos.y = Math.floor(new_pos.y);
+
+    if (fly2) {
+      _kaboom.default.destroy(fly2);
+    }
+
+    fly2 = _kaboom.default.add([_kaboom.default.sprite("fly2"), _kaboom.default.pos(new_pos), "fly2"]);
+  }
+
+  _kaboom.default.action("fly2", function (s) {
+    s.move(CURRENT2_SPEED, 0);
+  });
+
+  _kaboom.default.collides("fly2", "right-wall", function () {
+    CURRENT2_SPEED = -FLY2_SPEED;
+
+    _kaboom.default.every("fly2", function (s) {
+      s.move(0, 0);
+    });
+  });
+
+  _kaboom.default.collides("fly2", "left-wall", function () {
+    CURRENT2_SPEED = FLY2_SPEED;
+
+    _kaboom.default.every("fly2", function (s) {
+      s.move(0, 0);
+    });
+  });
+
+  var fly3 = null;
+  var CURRENT3_SPEED = FLY3_SPEED;
+
+  function respawn_fly3() {
+    var new_pos = _kaboom.default.rand(_kaboom.default.vec2(200, 100), _kaboom.default.vec2(700, 400));
+
+    new_pos.x = Math.floor(new_pos.x);
+    new_pos.y = Math.floor(new_pos.y);
+
+    if (fly3) {
+      _kaboom.default.destroy(fly3);
+    }
+
+    fly3 = _kaboom.default.add([_kaboom.default.sprite("fly3"), _kaboom.default.pos(new_pos), "fly3"]);
+  }
+
+  _kaboom.default.action("fly3", function (s) {
+    s.move(CURRENT3_SPEED, 0);
+  });
+
+  _kaboom.default.collides("fly3", "right-wall", function () {
+    CURRENT3_SPEED = -FLY3_SPEED;
+
+    _kaboom.default.every("fly3", function (s) {
+      s.move(0, 0);
+    });
+  });
+
+  _kaboom.default.collides("fly3", "left-wall", function () {
+    CURRENT3_SPEED = FLY3_SPEED;
+
+    _kaboom.default.every("fly3", function (s) {
+      s.move(0, 0);
+    });
+  });
+
   function spawnWeb(p) {
     _kaboom.default.add([_kaboom.default.sprite("web"), _kaboom.default.pos(p), _kaboom.default.origin("center"), "webHit"]);
   }
 
   _kaboom.default.keyPress("space", function () {
-    spawnWeb(spider.pos.add(0, 40));
+    spawnWeb(spider.pos.add(30, 60));
   });
 
   _kaboom.default.action("webHit", function (b) {
     b.move(0, WEB_SPEED);
-
-    if (b.pos === "ground") {
-      _kaboom.default.destroy(b);
-    }
   });
+
+  _kaboom.default.collides("webHit", "ground", function (b) {
+    _kaboom.default.destroy(b);
+  });
+
+  _kaboom.default.collides("webHit", "fly1", function (b, s) {
+    _kaboom.default.camShake(4);
+
+    _kaboom.default.destroy(b);
+
+    respawn_fly1();
+
+    _kaboom.default.destroy(s);
+
+    score.value++;
+    score.text = score.value;
+  });
+
+  _kaboom.default.collides("webHit", "fly2", function (b, s) {
+    _kaboom.default.camShake(4);
+
+    _kaboom.default.destroy(b);
+
+    respawn_fly2();
+
+    _kaboom.default.destroy(s);
+
+    score.value++;
+    score.text = score.value;
+  });
+
+  _kaboom.default.collides("webHit", "fly3", function (b, s) {
+    _kaboom.default.camShake(4);
+
+    _kaboom.default.destroy(b);
+
+    respawn_fly3();
+
+    _kaboom.default.destroy(s);
+
+    score.value++;
+    score.text = score.value;
+  });
+
+  _kaboom.default.add([_kaboom.default.rect(310, 30), _kaboom.default.pos(310, 640)]);
+
+  _kaboom.default.add([_kaboom.default.text("Capture 10 flies and WIN!", 12), _kaboom.default.pos(315, 650), _kaboom.default.color(0, 0, 0)]);
 }
 },{"../src/kaboom":"kaboom.js","./win":"../scenes/win.js","./lose":"../scenes/lose.js"}],"main.js":[function(require,module,exports) {
 "use strict";
@@ -274,24 +480,7 @@ var _game = _interopRequireDefault(require("../scenes/game"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* import Win from "../scenes/win";
-import Lose from "../scenes/lose"; */
-
-/* const k = kaboom({
-  ...{
-    fullscreen: true,
-    width: 480,
-    height: 360,
-    scale: 1,
-    startScene: "main",
-    version: "0.5.0",
-    clearColor: [0.28627450980392155, 0.7647058823529411, 0.7725490196078432, 1]
-  }
-}); */
 _kaboom.default.scene("game", _game.default);
-/* k.scene("lose", Lose);
-k.scene("win", Win); */
-
 
 _kaboom.default.scene("main", function () {
   _kaboom.default.add([_kaboom.default.text("Along Came A Spider", 32), _kaboom.default.pos(_kaboom.default.width() / 2, _kaboom.default.height() / 2), _kaboom.default.color(1, 1, 1, 1), _kaboom.default.origin("top")]);
@@ -363,7 +552,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57474" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52813" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

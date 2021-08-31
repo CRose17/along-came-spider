@@ -1,23 +1,7 @@
 import k from "./kaboom";
 import Game from "../scenes/game";
-/* import Win from "../scenes/win";
-import Lose from "../scenes/lose"; */
-
-/* const k = kaboom({
-  ...{
-    fullscreen: true,
-    width: 480,
-    height: 360,
-    scale: 1,
-    startScene: "main",
-    version: "0.5.0",
-    clearColor: [0.28627450980392155, 0.7647058823529411, 0.7725490196078432, 1]
-  }
-}); */
 
 k.scene("game", Game);
-/* k.scene("lose", Lose);
-k.scene("win", Win); */
 
 k.scene("main", () => {
   k.add([
