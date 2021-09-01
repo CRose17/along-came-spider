@@ -10,6 +10,7 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -33,13 +34,13 @@
   <body>
     <header class="site-header">
       <div class="container">
-        <div class="row">
+        <div class="row row-content align-items-center">
           <div class="col">
             <h1>Along Came a Spider</h1>
             <h2>A 2-D game hackathon challenge</h2>
             <a
               href="game.html"
-              class="btn float-right gameButtonLink"
+              class="btn float-left gameButtonLink"
               style="background-color: blanchedalmond"
               >Click to play game!</a
             >
@@ -48,32 +49,55 @@
       </div>
     </header>
     <div class="container">
-      <div class="row">
-        <div class="col-4 col-sm-2 offset-1">
+      <div class="row row-content align-items-center">
+        <div class="col-sm-4 col-md-3">
           <h2>About the Game</h2>
-          <p>This game was designed using the KaboomJS library</p>
         </div>
+          <div class="col">
+            <div class="media">
+            <div class="media-body align-self-center">
+              <p class="d-none d-sm-block">This game was designed using the KaboomJS library.</p>
+          <p class="d-none d-sm-block">
+            Functionally a space-invaders take on the 2-D shooter
+            genre upside down. Take control of a spider and capture flies via webshooting to
+            win!
+          </p>
+            </div>
+            <img
+              class="d-flex ml-3 card-img-top float-right"
+              src="./sprites/ACASScreen2.png"              
+              alt="A picture of the video game in action"
+            />            
+            </div>
+          </div>          
       </div>
     </div>
     <div class="container">
-      <div class="row">
-        <div class="col-4 col-sm-2 offset-1">
-          <h2>Developed by :</h2>
-          <h5>Cameron Rosenberger</h5>
-          <h6>Full-Stack and Mobile Developer</h6>
-          <p>HTML, CSS, JavaScript, React, React-Native, NodeJS, MongoDB</p>
-          <p>Coding and learning something new everyday</p>
+      <div class="row row-content align-items-center">
+    <div class="col-sm-4 col-md-3">
+      <h2>Meet the Developer</h2>
+    </div>
+    <div class="card mb-3">
+      <img class="card-img-top" src="./images/Current Bio headshot.jpg" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Cameron Rosenberger - Full Stack and Mobile Developer</h5>
+        <p class="card-text">HTML, CSS, JavaScript, React, React-Native, NodeJS, MongoDB.</br>
+          Coding and learning something new everyday.</p>
+        <a href="https://github.com/CRose17">
+          <div class="fab fa-github"></div>
+        </a>
+        <a href="https://www.linkedin.com/in/cameron-rosenberger/">
+          <div class="fab fa-linkedin"></div>
+          </a>
+      </div>
+    </div>  
         </div>
+      </div>      
       </div>
     </div>
     <footer class="site-footer">
       <div class="container">
-        <div class="row">
-          <div class="col-4 col-sm-2 offset-1">
-            <a href="https://github.com/CRose17">
-              <div class="fab fa-github"></div>
-            </a>
-          </div>
+        <div class="row">          
         </div>
       </div>
     </footer>

@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/CRose17/along-came-spider#readme",
   "dependencies": {
-    "kaboom": "^0.5.1"
+    "bootstrap": "^4.5.2",
+    "jquery": "^3.5.1",
+    "kaboom": "^0.5.1",
+    "popper.js": "^1.16.1"
   },
   "alias": {
     "kaboom": "./node_modules/kaboom/dist/kaboom.mjs"
