@@ -10,6 +10,6 @@ Take control of a spider and capture flies via webshooting to win!
 
 ## Developed by Cameron Rosenberger
 
-[Game] https://crose17.github.io/along-came-spider/
-[GitHub] https://github.com/CRose17  
-[LinkedIn] https://www.linkedin.com/in/cameron-rosenberger/
+[Game] https://crose17.github.io/along-came-spider/<br/>
+[GitHub] https://github.com/CRose17<br/>  
+[LinkedIn] https://www.linkedin.com/in/cameron-rosenberger/<br/>
