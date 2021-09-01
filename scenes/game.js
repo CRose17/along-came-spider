@@ -5,15 +5,15 @@ import Lose from "./lose";
 k.scene("lose", Lose);
 k.scene("win", Win);
 
-k.loadRoot("https://i.imgur.com/");
-k.loadSprite("spider", "aTxTD53.png");
-k.loadSprite("fly1", "7FtRXwP.png");
-k.loadSprite("fly2", "7FtRXwP.png");
-k.loadSprite("fly3", "7FtRXwP.png");
-k.loadSprite("bolt", "0PndioM.png");
-k.loadSprite("web", "6iE2HD3.png?1");
-k.loadSprite("wall", "7JzKe7Xs.png");
-k.loadSprite("ground", "8hfkcDUs.png");
+k.loadRoot("../images/");
+k.loadSprite("spider", "spider.png");
+k.loadSprite("fly1", "fly.png");
+k.loadSprite("fly2", "fly.png");
+k.loadSprite("fly3", "fly.png");
+//k.loadSprite("bolt", "0PndioM.png");
+k.loadSprite("web", "web.png?1");
+k.loadSprite("wall", "wall.png");
+k.loadSprite("ground", "ground.png");
 
 const block_size = 20;
 
