@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
   <head>
     <title>Along Came A Spider</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial scale=1" />
-    <link rel="stylesheet" href="./src/style.css" />
+    <link rel="stylesheet" href="/landingPage.css" />
   </head>
 
   <body>
-    <script src="https://kaboomjs.com/lib/0.5.1/kaboom.js"></script>
-    <script src="./src/main.js"></script>
+    <h1>Landing Page</h1>
+    <button type="button" href="./src/main.js">Click to play game</button>
   </body>
 </html>
