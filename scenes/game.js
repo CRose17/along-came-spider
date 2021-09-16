@@ -2,8 +2,16 @@ import k from "../src/kaboom";
 import Win from "./win";
 import Lose from "./lose";
 
-k.scene("lose", Lose);
-k.scene("win", Win);
+k.scene("lose", Lose, (score) => {
+  if (score > highScore) {
+    highScore = score;
+  }
+});
+k.scene("win", Win, (score) => {
+  if (score > highScore) {
+    highScore = score;
+  }
+});
 
 k.loadRoot("../images/");
 k.loadSprite("spider", "spider.png");
@@ -14,6 +22,8 @@ k.loadSprite("fly3", "fly.png");
 k.loadSprite("web", "web.png?1");
 k.loadSprite("wall", "wall.png");
 k.loadSprite("ground", "ground.png");
+
+let highScore = 0;
 
 const block_size = 20;
 
@@ -233,7 +243,7 @@ export default function Game() {
   });
 
   k.collides("webHit", "fly1", (b, s) => {
-    k.camShake(4);
+    k.camShake(2);
     k.destroy(b);
     respawn_fly1();
     k.destroy(s);
@@ -242,7 +252,7 @@ export default function Game() {
   });
 
   k.collides("webHit", "fly2", (b, s) => {
-    k.camShake(4);
+    k.camShake(2);
     k.destroy(b);
     respawn_fly2();
     k.destroy(s);
@@ -251,7 +261,7 @@ export default function Game() {
   });
 
   k.collides("webHit", "fly3", (b, s) => {
-    k.camShake(4);
+    k.camShake(2);
     k.destroy(b);
     respawn_fly3();
     k.destroy(s);

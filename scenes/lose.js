@@ -5,7 +5,7 @@ k.scene("game", Game);
 
 export default function Lose() {
   k.add([
-    k.text("So close", 32),
+    k.text("So close!\n" + "score:" + score, 32),
     k.pos(k.width() / 2, k.height() / 2),
     k.color(1, 1, 1, 1),
     k.origin("top")
