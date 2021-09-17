@@ -13,6 +13,8 @@ k.scene("win", Win, (score) => {
   }
 });
 
+k.volume(0.5);
+
 k.loadRoot("../sounds/");
 k.loadSound("splat", "splat.mp3");
 
@@ -231,10 +233,12 @@ export default function Game() {
 
   function spawnWeb(p) {
     k.add([k.sprite("web"), k.pos(p), k.origin("center"), "webHit"]);
+    k.play("splat", {
+      volume: 0.2
+    });
   }
 
   k.keyPress("space", () => {
-    k.play("splat");
     spawnWeb(spider.pos.add(30, 60));
   });
 
