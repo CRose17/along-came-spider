@@ -13,10 +13,13 @@ k.scene("win", Win, (score) => {
   }
 });
 
-k.volume(0.5);
-
 k.loadRoot("../sounds/");
 k.loadSound("splat", "splat.mp3");
+k.loadSound("theme", "theme.mp3");
+k.volume(0.5);
+
+const music = play("theme");
+music.loop();
 
 k.loadRoot("../images/");
 k.loadSprite("spider", "spider.png");
