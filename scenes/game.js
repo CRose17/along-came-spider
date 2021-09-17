@@ -1,7 +1,6 @@
 import k from "../src/kaboom";
 import Win from "./win";
 import Lose from "./lose";
-import splat from "../sounds/splat.mp3";
 
 k.scene("lose", Lose, (score) => {
   if (score > highScore) {
@@ -232,9 +231,9 @@ export default function Game() {
   }
 
   k.keyPress("space", () => {
-    k.play(splat);
     spawnWeb(spider.pos.add(30, 60));
   });
+  <audio data-key="35" src="../sounds/splat.mp3"></audio>;
 
   k.action("webHit", (b) => {
     b.move(0, WEB_SPEED);
